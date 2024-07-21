@@ -5,6 +5,11 @@ namespace Decorator_Design_Pattern.Implementation.Decorators;
 
 public class PriorityTask : IUserTask
 {
+    public void Accept(IVisitor visitor)
+    {
+        visitor.Visit(this);
+    }
+
     public IEnumerable<string> Description { get; set; }
     private readonly IUserTask _taskDecorator;
     public PriorityEnum Priority { get; set; }

@@ -2,15 +2,20 @@
 
 namespace Decorator_Design_Pattern.Implementation.Decorators;
 
-public class RecurringTask : IUserTask
+public class RecurringTask : UserTaskDecorator
 {
-    public IEnumerable<string> Description { get; set; }
+    public void Accept(IVisitor visitor)
+    {
+        visitor.Visit(this);
+    }
+
+    public IEnumerable<string?> Description { get; set; }
     private readonly IUserTask _taskDecorator;
     private int _recurrenceInterval { get; set; } // This will be in seconds for testing purposes
     private int _totalRecurrenceCount { get; set; }
     private int _currentRecurrenceCount = 0;
 
-    public RecurringTask(IUserTask taskDecorator, int recurrenceInterval, int totalRecurrenceCount)
+    public RecurringTask(IUserTask taskDecorator, int recurrenceInterval, int totalRecurrenceCount) : base(taskDecorator)
     {
         _taskDecorator = taskDecorator;
         _recurrenceInterval = recurrenceInterval;

@@ -4,8 +4,14 @@ namespace Decorator_Design_Pattern.Implementation.Decorators;
 
 public class DeadlineTask : IUserTask
 {
+    public void Accept(IVisitor visitor)
+    {
+        visitor.Visit(this);
+    }
+
     public IEnumerable<string> Description { get; set; }
     private readonly IUserTask _taskDecorator;
+    private int _count { get; set; }
     private DateTimeOffset _deadline { get; set; }
 
     public DeadlineTask(IUserTask taskDecorator, int deadline)
